@@ -1,5 +1,6 @@
-SongWriter
-==========
+This file tracks through the main changes.
 
 
-SongWriter is a simple Python3 program to download song lyrics form the internet..
+###v0.1.0
+
+	Initializes the repo and logs
