@@ -1,3 +1,9 @@
+# NOTICE: AZLYRICS PROHIBITS PARSING THEIR LYRICS DATABASE 
+# THROUGH THIRD PARTY APPS AND SCRIPTS. HENCE WE NO WILL LONGER SUPPORT 
+# DOWNLOADING LYRICS FROM AZLYRICS. 
+# <!-- Usage of azlyrics.com content by any third-party lyrics provider is prohibited by our licensing agreement. Sorry about that. -->
+
+
 # This script copies lyrics text from the provided web link from
 # azlyrics.com. to a text file. Wrote it for educational purpose only!!
 # Uses python3's urllib and data structures - level intermediate
@@ -10,65 +16,68 @@
 
 __author__ = 'biwin'
 import urllib.request
+import sys 
 
 proceed = False
 
 while proceed is False:
-	url = str(input("Enter the azLyrics url you want to download !!"))
-	url_parts = url.split('.com')
-	if url_parts[0] == 'http://www.azlyrics':
-		proceed = True
-	elif url_parts[0] == 'www.azlyrics':
-		url_parts[0] = 'http://www.azlyrics'
-		url = '.com'.join(url_parts)
-		proceed = True
-	elif url_parts[0] == 'azlyrics':
-		url_parts[0] = 'http://www.azlyrics'
-		url = '.com'.join(url_parts)
-		proceed = True
-	else:
-		print('Enter the URL again!')
+    print('Usage of azlyrics.com content by any third-party lyrics provider is illegal')
+    print('by proceeding further you aknowledge that you are responsible for any of the further actions')
+    url = str(input("Enter the azLyrics url you want to download !!"))
+    url_parts = url.split('.com')
+    if url_parts[0] == 'http://www.azlyrics':
+        proceed = True
+    elif url_parts[0] == 'www.azlyrics':
+        url_parts[0] = 'http://www.azlyrics'
+        url = '.com'.join(url_parts)
+        proceed = True
+    elif url_parts[0] == 'azlyrics':
+        url_parts[0] = 'http://www.azlyrics'
+        url = '.com'.join(url_parts)
+        proceed = True
+    else:
+        print('Enter the URL again!')
 
 print('Opening the URL....')
 
 try:
-	# opens the url
-	# url = "http://www.azlyrics.com/lyrics/eminem/stan.html"
-	page = urllib.request.urlopen(url)
-	text = page.read().decode('utf8')
+    # opens the url
+    # url = "http://www.azlyrics.com/lyrics/eminem/stan.html"
+    page = urllib.request.urlopen(url)
+    text = page.read().decode('utf8')
 except (ValueError, RuntimeError, TypeError, NameError):
-	print("Unable to open the URL")
+    print("Unable to open the URL")
 
 
 # clears the html tags
 def clear_html_tags(content):
-	content = content.replace("<i>", "")
-	content = content.replace("</i>", "")
-	content = content.replace("<br>", "")
-	content = content.replace("<br />", "")
-	content = content.replace(">", "")
-	return content
+    content = content.replace("<i>", "")
+    content = content.replace("</i>", "")
+    content = content.replace("<br>", "")
+    content = content.replace("<br />", "")
+    content = content.replace(">", "")
+    return content
 
 
 # finds the given fields
 def find_text(find_this):
-	position = text.find(find_this)
-	return position
+    position = text.find(find_this)
+    return position
 
 
 # writes to a file
 def write_lyrics(final_artist, final_title, final_lyric):
-	filename = final_artist + " - " + final_title + " lyrics.txt"
-	dislclaimer = final_artist + ' lyrics are property and copyright of their owners.\n \
-	"' + final_title + '" lyrics provided for educational purposes and personal-\nuse only. Phrased from azlyrics.com \n'
-	line = " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - \n"
-	a = open(filename, 'w')
-	a.write(dislclaimer + line + "\n\n")
-	a.write("Artist: " + final_artist + "\n")
-	a.write("Song Title: " + final_title + "\n ")
-	a.write(final_lyric)
-	a.write("\n\n\n" + line + dislclaimer + line)
-	a.close()
+    filename = final_artist + " - " + final_title + " lyrics.txt"
+    dislclaimer = final_artist + ' lyrics are property and copyright of their owners.\n \
+    "' + final_title + '" lyrics provided for educational purposes and personal-\nuse only. Parsed from azlyrics.com \n'
+    line = " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - \n"
+    a = open(filename, 'w')
+    a.write(dislclaimer + line + "\n\n")
+    a.write("Artist: " + final_artist + "\n")
+    a.write("Song Title: " + final_title + "\n ")
+    a.write(final_lyric)
+    a.write("\n\n\n" + line + dislclaimer + line)
+    a.close()
 
 
 print('Fetching the metadata...')
@@ -105,4 +114,4 @@ title = title.title()
 print('Writing the lyrics file...')
 # writes the file
 write_lyrics(artist, title, lyric)
-print("Downloading finished without any errors")
+print("Downloading finished with many errors")
